@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata: # kpt-merge: kyverno/CLUSTER_POLICY_NAME
-  name: CLUSTER_POLICY_NAME
+  name: upf-multus-awsipmgt-injection
   namespace: kyverno
   annotations:
     policies.kyverno.io/title: Inject Init-Container
@@ -17,7 +17,7 @@ spec:
       - resources:
           selector:
             matchLabels:
-              workload.nephio.org/oai: POD_LABEL_VALUE
+              workload.nephio.org/oai: upf
           kinds:
           - Pod
           operations:
