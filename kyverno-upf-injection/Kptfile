@@ -1,0 +1,22 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata: # kpt-merge: /kyverno-upf-injection
+  name: kyverno-upf-injection
+  annotations:
+    config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|kyverno-upf-injection'
+upstream:
+  type: git
+  git:
+    repo: https://github.com/infinitydon/nephio-aws-packages.git
+    directory: kyverno-awsipmgt-core-package
+    ref: main
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/infinitydon/nephio-aws-packages.git
+    directory: kyverno-awsipmgt-core-package
+    ref: main
+    commit: ba037508124db1f8b2cb680698024cd0d7840b04
+info:
+  description: this package is used to create the EKS terraform FLuxcD GitRepo Resource
