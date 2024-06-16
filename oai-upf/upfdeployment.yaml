@@ -1,0 +1,42 @@
+apiVersion: workload.nephio.org/v1alpha1
+kind: NFDeployment
+metadata: # kpt-merge: upf-example/upf-example
+  name: upf-edge
+  namespace: oai-core
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFDeployment|upf-example|upf-example'
+spec:
+  provider: upf.openairinterface.org
+  capacity:
+    maxDownlinkThroughput: 5G
+    maxUplinkThroughput: 5G
+  parametersRefs:
+  - name: oai-upf-config
+    apiVersion: workload.nephio.org/v1alpha1
+    kind: NFConfig
+  interfaces:
+  - name: n3
+    ipv4:
+      address: 10.2.3.16/24
+      gateway: 10.2.3.1
+    vlanID: 30
+  - name: n4
+    ipv4:
+      address: 10.2.4.16/24
+      gateway: 10.2.4.1
+    vlanID: 31
+  - name: n6
+    ipv4:
+      address: 10.2.5.16/24
+      gateway: 10.2.5.1
+    vlanID: 422
+  networkInstances:
+  - name: vpc-internal
+    interfaces:
+    - n4
+  - name: vpc-internet
+    interfaces:
+    - n6
+  - name: vpc-ran
+    interfaces:
+    - n3
