@@ -1,0 +1,12 @@
+apiVersion: req.nephio.org/v1alpha1
+kind: Capacity
+metadata: # kpt-merge: /dataplane
+  name: dataplane
+  annotations:
+    config.kubernetes.io/local-config: "true"
+    specializer.nephio.org/owner: workload.nephio.org/v1alpha1.NFDeployment.upf-example
+    specializer.nephio.org/namespace: example
+    internal.kpt.dev/upstream-identifier: 'req.nephio.org|Capacity|default|dataplane'
+spec:
+  maxUplinkThroughput: 5G
+  maxDownlinkThroughput: 5G
