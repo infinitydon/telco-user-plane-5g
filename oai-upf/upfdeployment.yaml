@@ -1,8 +1,8 @@
 apiVersion: workload.nephio.org/v1alpha1
 kind: NFDeployment
 metadata: # kpt-merge: upf-example/upf-example
-  name: upf-edge
-  namespace: oai-core
+  name: upf-example
+  namespace: upf-example
   annotations:
     internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFDeployment|upf-example|upf-example'
 spec:

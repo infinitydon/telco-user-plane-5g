@@ -2,7 +2,7 @@ apiVersion: workload.nephio.org/v1alpha1
 kind: NFConfig
 metadata: # kpt-merge: upf-example/oai-upf-config
   name: oai-upf-config
-  namespace: oai-core
+  namespace: upf-example
   annotations:
     internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFConfig|upf-example|oai-upf-config'
 spec:
