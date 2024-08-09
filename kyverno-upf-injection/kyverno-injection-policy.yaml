@@ -1,0 +1,32 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata: # kpt-merge: kyverno/CLUSTER_POLICY_NAME
+  name: CLUSTER_POLICY_NAME # kpt-set: ${core-kyverno-policy-name}
+  namespace: kyverno
+  annotations:
+    policies.kyverno.io/title: Inject Init-Container
+    policies.kyverno.io/category: Sample
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: "This policy injects Multus NAD annotation to the OAI POD."
+    internal.kpt.dev/upstream-identifier: 'kyverno.io|ClusterPolicy|kyverno|CLUSTER_POLICY_NAME'
+spec:
+  rules:
+  - name: inject-sidecar
+    match:
+      any:
+      - resources:
+          selector:
+            matchLabels:
+              workload.nephio.org/oai: POD_LABEL_VALUE # kpt-set: ${core-kyverno-pod-label-value}
+          kinds:
+          - Pod
+          operations:
+          - CREATE
+          - UPDATE
+    mutate:
+      patchStrategicMerge:
+        spec:
+          initContainers:
+          - name: awsipmgmt
+            image: public.ecr.aws/r8l3e1z0/aws-ip-manager:v0.1
+            args: [/bin/sh, -c, '/app/script.sh initContainers']
